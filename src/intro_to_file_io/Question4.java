@@ -2,6 +2,11 @@ package intro_to_file_io;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -46,10 +51,32 @@ public class Question4 implements ActionListener {
 			
 		}
 	if(e.getSource()==b3) {
-		
+		try {
+			JOptionPane.showMessageDialog(b3, "Saving Task(s)");
+			FileWriter fw = new FileWriter("src/intro_to_file_io/test2.txt", true);
+
+			fw.write(at +"\n");
+				
+			fw.close();
+			} catch (IOException e3) {
+				e3.printStackTrace();
+			}
 	}
 	if(e.getSource()==b4) {
-		
+		try {
+			JOptionPane.showMessageDialog(b3, "Loading Tasks...");
+			BufferedReader br = new BufferedReader(new FileReader("src/intro_to_file_io/test2.txt"));
+			
+			String line = br.readLine();
+			
+			br.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 	}
 	}
 
