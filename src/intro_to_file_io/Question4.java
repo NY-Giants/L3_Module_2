@@ -22,10 +22,13 @@ public class Question4 implements ActionListener {
 	JButton b3 = new JButton("Save");
 	JButton b4 = new JButton("Load");
 	static String at;
+	static String rt;
+	ArrayList<String> TaskList = new ArrayList<String>();
+	
 	public static void main(String[] args) {
 		Question4 q4 = new Question4();
-		ArrayList<String> TaskList = new ArrayList<String>();
-		TaskList.add(at);
+		
+	
 	}
 	
 	
@@ -41,22 +44,32 @@ public class Question4 implements ActionListener {
 		b2.addActionListener(this);
 		b3.addActionListener(this);
 		b4.addActionListener(this);
+		TaskList.add(at);
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==b1) {
 		 at = JOptionPane.showInputDialog("Which Task Would you Like to Add?");
+		 TaskList.add(at);
 		}
 	if(e.getSource()==b2) {
+		 rt = JOptionPane.showInputDialog("Which Task Would you Like to Remove?");
+		 for(int i = 0; i < TaskList.size(); i++) {
+			 if(TaskList.get(i).equals(rt)) {
+				 TaskList.remove(rt);
+			 }
+				}
+		
 			
 		}
 	if(e.getSource()==b3) {
 		try {
 			JOptionPane.showMessageDialog(b3, "Saving Task(s)");
 			FileWriter fw = new FileWriter("src/intro_to_file_io/test2.txt", true);
-
+			for(int i = 0; i < TaskList.size(); i++) {
 			fw.write(at +"\n");
-				
+			}
 			fw.close();
 			} catch (IOException e3) {
 				e3.printStackTrace();
@@ -68,7 +81,7 @@ public class Question4 implements ActionListener {
 			BufferedReader br = new BufferedReader(new FileReader("src/intro_to_file_io/test2.txt"));
 			
 			String line = br.readLine();
-			
+			TaskList.add(line);
 			br.close();
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
